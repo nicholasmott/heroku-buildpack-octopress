@@ -54,6 +54,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       create_database_yml
       install_binaries
       run_assets_precompile_rake_task
+      generate_middleman_site
     end
   end
 
@@ -520,6 +521,14 @@ params = CGI.parse(uri.query || "")
       if $?.success?
         puts "Asset precompilation completed (#{"%.2f" % time}s)"
       end
+    end
+  end
+
+  def generate_middleman_site
+    puts "Building Middleman Site"
+    pipe("env PATH=$PATH bundle exec middleman build 2>&1")
+    unless $? == 0
+      error "Failed to generate site with Middleman"
     end
   end
 end
