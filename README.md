@@ -5,18 +5,18 @@ A fork of the [official Ruby Buildpack][1] with support for generating an [Octop
 
 Inspired by the [heroku-buildpack-ruby-octopress][3] from Jason Garber but updated to work with the new Heroku Bundler method of [specifying a Ruby version][4].
 
-Installation
-------------
+Usage
+-----
 To use this build pack prepare your Octopress install according to the [original instructions][5] from Jason Garber.
 
 When creating the Heroku application substitute this buildpack.
 
 ```
-heroku create --buildpack https://github.com/nicholasmott/heroku-buildpack-octopress
+heroku create --buildpack https://github.com/nicholasmott/heroku-buildpack-octopress.git
 ```
 or add this buildpack to your current app
 ```
-heroku config:add BUILDPACK_URL=https://github.com/nicholasmott/heroku-buildpack-octopress
+heroku config:add BUILDPACK_URL=https://github.com/nicholasmott/heroku-buildpack-octopress.git
 ```
 
 Flow
