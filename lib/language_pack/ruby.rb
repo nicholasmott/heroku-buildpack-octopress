@@ -54,7 +54,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       create_database_yml
       install_binaries
       run_assets_precompile_rake_task
-      generate_middleman_site
+      generate_octopress_site
     end
   end
 
@@ -524,11 +524,15 @@ params = CGI.parse(uri.query || "")
     end
   end
 
-  def generate_middleman_site
-    topic "Building Middleman Site"
-    pipe("env PATH=$PATH bundle exec middleman build 2>&1")
-    unless $? == 0
-      error "Failed to generate site with Middleman"
+  def generate_octopress_site
+    topic "Building Octopress Site"
+    if File.read(".slugignore") =~ /plugins|sass|source/
+      error ".slugignore contains #{$&}. Octopress generation will fail."
+    else
+      pipe("env PATH=$PATH bundle exec rake generate 2>&1")
+      unless $? == 0
+        error "Failed to generate site with Octopress"
+      end
     end
   end
 end

@@ -1,3 +1,3 @@
-## v1 (2012-06-28)
+## v1 (2012-07-07)
 
-Add build middleman to standard Heroku Ruby buildpack.
+Add generate octopress to standard Heroku Ruby buildpack. Update license and readme.
