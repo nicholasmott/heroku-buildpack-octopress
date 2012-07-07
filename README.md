@@ -25,7 +25,7 @@ The buildpack adds the octopress `generate` task after `rake assets:precompile` 
 
 The Rack language pack is then invoked by the `config.ru` file which runs the Sinatra Static Server to serve the generated files.
 
-Rails 2/3 detection remains in place but will be ignored.
+Rails 2/3 language packs remain in place but will be ignored.
 
 [1]: https://github.com/heroku/heroku-buildpack-ruby
 [2]: http://octopress.org/
