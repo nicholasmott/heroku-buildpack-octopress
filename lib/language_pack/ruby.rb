@@ -5,7 +5,7 @@ require "language_pack/base"
 
 # base Ruby Language Pack. This is for any base ruby app.
 class LanguagePack::Ruby < LanguagePack::Base
-  BUILDPACK_VERSION   = "v46"
+  BUILDPACK_VERSION   = "v47"
   LIBYAML_VERSION     = "0.1.4"
   LIBYAML_PATH        = "libyaml-#{LIBYAML_VERSION}"
   BUNDLER_VERSION     = "1.3.0.pre.5"
@@ -370,6 +370,10 @@ ERROR
       end
 
       if has_windows_gemfile_lock?
+        topic "WARNING: Removing `Gemfile.lock` because it was generated on Windows."
+        puts "Bundler will do a full resolve so native gems are handled properly."
+        puts "This may result in unexpected gem versions being used in your app."
+
         log("bundle", "has_windows_gemfile_lock")
         File.unlink("Gemfile.lock")
       else
@@ -618,6 +622,8 @@ params = CGI.parse(uri.query || "")
       purge_bundler_cache
     elsif cache_exists?(bundler_cache) && !(File.exists?(ruby_version_cache) && full_ruby_version == File.read(ruby_version_cache).chomp)
       puts "Ruby version change detected. Clearing bundler cache."
+      puts "Old: #{File.read(ruby_version_cache).chomp}"
+      puts "New: #{full_ruby_version}"
       purge_bundler_cache
     end
 
