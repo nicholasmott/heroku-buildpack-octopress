@@ -597,6 +597,7 @@ params = CGI.parse(uri.query || "")
         error "Failed to generate site with Octopress"
       end
     end
+  end
 
   def bundler_cache
     "vendor/bundle"
